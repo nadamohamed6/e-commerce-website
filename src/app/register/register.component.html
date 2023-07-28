@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Register here</h1>
+    <p *ngIf="apiErrors" class="alert alert-danger">
+        {{apiErrors}}</p>
+        <!-- <h3>{{registerForm.get('email')?.errors |json}}</h3>  -->
+
+<form [formGroup]="registerForm" (ngSubmit)="handleRegister(registerForm)">
+    <label for="email">Email:</label>
+    <input id="email" type="email" class="form-control mb-2" formControlName="email">
+   <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched" class="alert alert-danger">
+    <p *ngIf="registerForm.get('email')?.getError('required')" class="mb-0">this field is required</p>
+    <p *ngIf="registerForm.get('email')?.getError('email')" class="mb-0">email is invalid</p>
+
+
+   </div>
+    <label for="password">Password:</label>
+    <input id="password" type="password" class="form-control mb-2" formControlName="password">
+    <div *ngIf ="registerForm.get('password')?.errors && registerForm.get('password')?.touched" class="alert alert-danger">
+        <p *ngIf ="registerForm.get('password')?.getError('required')" class="mb-0 ">this field is required</p>
+        <p *ngIf ="registerForm.get('password')?.getError('pattern')" class="mb-0">password is invalid</p>
+      </div>
+
+<button [disabled]="registerForm.invalid" type="submit" class="btn bg-main text-white d-block ms-auto">
+    <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+      <span *ngIf ="!isLoading">Submit</span>
+</button>
+</form>
+
+
+
+</div>

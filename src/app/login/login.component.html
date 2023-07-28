@@ -1,0 +1,65 @@
+
+<div class="container">
+  <h2>Login Form:</h2>
+
+
+   <p *ngIf="apiError" class="alert alert-danger">
+    {{apiError}}</p> 
+
+
+
+ 
+
+   <form [formGroup]="loginForm" (ngSubmit)="handlelogin(loginForm)">
+
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name" class="form-control mb-2">
+    <div *ngIf="loginForm.get('name')?.errors &&loginForm.get('name')?.touched" class="alert alert-danger">
+      <p *ngIf="loginForm.get('name')?.getError('required')" class="mb-0">please fill this field</p>
+      <p *ngIf="loginForm.get('name')?.getError('minlength')" class="mb-0">min length is 4 char</p>
+      <p *ngIf ="loginForm.get('name')?.getError('maxlength')" class="mb-0">max length is 12 char</p>
+
+    </div>
+
+
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" class="form-control mb-2">
+    <div *ngIf ="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="alert alert-danger">
+      <p *ngIf="loginForm.get('email')?.getError('required')" class="mb-0">please fill this field</p>
+
+      <p *ngIf ="loginForm.get('email')?.getError('email')" class="mb-0">this email is not valid</p>
+
+    </div>
+
+
+    <label for="password">Password:</label>
+    <input id="password" type="Password" formControlName="password" class="form-control mb-2">
+    <div *ngIf ="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="alert alert-danger">
+      <p *ngIf ="loginForm.get('password')?.getError('required')" class="mb-0 ">this field is required</p>
+      <p *ngIf ="loginForm.get('password')?.getError('pattern')" class="mb-0">password is invalid</p>
+    </div>
+
+
+    <label for="rePassword">RePassword:</label>
+    <input id="rePassword" type="Password" formControlName="rePassword" class="form-control mb-2">
+    <div *ngIf ="loginForm.get('rePassword')?.errors && loginForm.get('rePassword')?.touched" class="alert alert-danger">
+      <p *ngIf ="loginForm.get('rePassword')?.getError('required')" class="mb-0 ">this field is required</p>
+      <!-- <p *ngIf ="loginForm.get('rePassword')?.getError('passwordMatch')" class="mb-0">Password and Repassword dont match</p> -->
+    </div>
+
+    <label for="phone">Phone:</label>
+    <input id="phone" type="tel" formControlName="phone" class="form-control mb-2">
+    <div *ngIf ="loginForm.get('phone')?.errors && loginForm.get('phone')?.touched" class="alert alert-danger">
+      <p *ngIf ="loginForm.get('phone')?.getError('required')" class="mb-0 ">this field is required</p>
+      <p *ngIf ="loginForm.get('phone')?.getError('minlength')" class="mb-0">phone number is lessthan 10</p>
+      <p *ngIf ="loginForm.get('phone')?.getError('maxlength')" class="mb-0">phone number is morethan 12</p>
+
+    </div>
+
+
+    <button [disabled]="loginForm.invalid" type="submit" class="btn bg-main text-white d-block ms-auto">
+      <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+      <span *ngIf ="!isLoading">Submit</span>
+    </button>
+   </form>
+</div>

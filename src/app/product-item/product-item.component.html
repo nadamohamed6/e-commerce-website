@@ -1,0 +1,19 @@
+<div class="product px-2 py-4">
+    <a [routerLink]="['/ProductDetails',product.id]">
+    <img [src]="product.imageCover" class="w-100">
+<div>
+    <p class="text-main">{{product.category.name}}</p>
+    <h2 class="h6">{{product.title.split(" ").splice(0,2).join(" ")}}</h2>
+    <div class="d-flex justify-content-between mb-3">
+        <span>{{product.price}} EGP</span>
+        <div >
+            <i class="fa fa-star rating-color"></i>
+            {{product.ratingsAverage}}
+        </div>
+    </div>
+</div>
+</a>
+<button (click)="addToCart(product.id)" class="btn bg-main text-white w-100">+ Add</button>
+
+</div>
+
